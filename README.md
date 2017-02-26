@@ -1,11 +1,25 @@
 # My Java Notes
 
-## Unicode Encoding
+## char
+
+### Unicode Encoding
 ```java
 char symbol = '\u00A9'; // ©
 ```
 An unicode character table can be find [here](https://unicode-table.com/en/#control-character).
 Java's *char* is a UTF-16 code unit. For characters with code-point > 0xFFFF it will be encoded with 2 *char* s (a surrogate pair).
+
+### Check if a char is a letter or number
+```java
+Character.isDigit(string.charAt(index))
+Character.isLetter(string.charAt(index))
+// or
+private static boolean isLetterOrDigit(char c) {
+    return (c >= 'a' && c <= 'z') ||
+           (c >= 'A' && c <= 'Z') ||
+           (c >= '0' && c <= '9');
+}
+```
 
 ## Array, List, ArrayList, LinkedList
 An *Array* (System.Array) is fixed in size once it is allocated. You can't add items to it or remove items from it. Also, all the elements must be the same type. As a result, it is type safe, and is also the most efficient of the three, both in terms of memory and performance. Also, System.Array supports multiple dimensions (i.e. it has a Rank property) while List and ArrayList do not (although you can create a List of Lists or an ArrayList of ArrayLists, if you want to).
