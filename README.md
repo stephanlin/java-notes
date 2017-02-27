@@ -76,7 +76,16 @@ The default initial capacity of an ArrayList is pretty small (10 from Java 1.4 -
 ## Map
 You can read about Map implementations [here](http://docs.oracle.com/javase/tutorial/collections/implementations/map.html).
 
-The three general-purpose Map implementations — **HashMap**, **TreeMap** and **LinkedHashMap**. If you need SortedMap operations or key-ordered Collection-view iteration, use TreeMap; if you want maximum speed and don't care about iteration order, use HashMap; if you want near-HashMap performance and insertion-order iteration, use LinkedHashMap. LinkedHashMap provides two capabilities that are not available with LinkedHashSet. When you create a LinkedHashMap, you can order it based on key access rather than insertion. In other words, merely looking up the value associated with a key brings that key to the end of the map. Also, LinkedHashMap provides the removeEldestEntry method, which may be overridden to impose a policy for removing stale mappings automatically when new mappings are added to the map. This makes it very easy to implement a custom cache.
+The three general-purpose Map implementations — **HashMap**, **TreeMap** and **LinkedHashMap**. If you need SortedMap operations or key-ordered Collection-view iteration, use TreeMap; if you want maximum speed and don't care about iteration order, use HashMap; if you want near-HashMap performance and insertion-order iteration, use LinkedHashMap. 
+
+LinkedHashMap provides two capabilities that are not available with LinkedHashSet. When you create a LinkedHashMap, you can order it based on key access rather than insertion. In other words, merely looking up the value associated with a key brings that key to the end of the map. Also, LinkedHashMap provides the removeEldestEntry method, which may be overridden to impose a policy for removing stale mappings automatically when new mappings are added to the map. This makes it very easy to implement a custom cache.
+
+### HashMap vs Hashtable
+
+* Hashtable is synchronized, whereas HashMap is not. This makes **HashMap better for non-threaded applications**, as unsynchronized Objects typically perform better than synchronized ones. (Note: **synchronized methods can't be called in the same time from multiple threads**).
+* Hashtable does not allow null keys or values.  HashMap allows one null key and any number of null values.
+* One of HashMap's subclasses is LinkedHashMap, so in the event that you'd want predictable iteration order (which is insertion order by default), you could easily swap out the HashMap for a LinkedHashMap. This wouldn't be as easy if you were using Hashtable. Hashtable is the only class other than vector which uses enumerator to iterate the values of HashTable object.
+* Hashtable is a subclass of Dictionary class which is now obsolete in Jdk 1.7, so, it is not used anymore. It is better off externally synchronizing a HashMap or using a ConcurrentMap implementation (e.g ConcurrentHashMap).
 
 ### Iterate over each entry in a Map
 
