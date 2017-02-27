@@ -27,8 +27,7 @@ int i = Integer.parseInt(String.valueOf('9');
 int i = '9' - '0';
 ```
 
-## List
-### Array
+## Array
 An Array (System.Array) is fixed in size once it is allocated. You can't add items to it or remove items from it. Also, all the elements must be the same type. As a result, it is type safe, and is also the most efficient of the three, both in terms of memory and performance. Also, System.Array supports multiple dimensions (i.e. it has a Rank property) while List and ArrayList do not (although you can create a List of Lists or an ArrayList of ArrayLists, if you want to).
 ```java
 int[] arr1 = {1, 2, 7, 11, 15};
@@ -37,7 +36,8 @@ for (int i=0; i<arr2.length; i++) {
   arr2[i] = i;
 }
 ```
-### ArrayList, LinkedList
+
+## List
 
 ```java
 List<?> myList = new ArrayList<?>();
@@ -45,6 +45,7 @@ ArrayList<?> myList = new ArrayList<?>();
 ```
 For the example above, almost always the first one is preferred over the second one. The first has the advantage that the implementation of the List can change (to a LinkedList for example), without affecting the rest of the code. This will be a difficult task to do with an ArrayList, not only because you will need to change ArrayList to LinkedList everywhere, but also because you may have used ArrayList specific methods. Since you are referring mylist as List<Integer> while it is still ArrayList<Integer>, hence you can use the methods available in the List interface ONLY. This is better statement, if you are using cross class.method functionality.
 
+### ArrayList vs. LinkedList
 There are two general-purpose List implementations — ArrayList and LinkedList.
 You can read about List implementations [here](http://docs.oracle.com/javase/tutorial/collections/implementations/list.html).
 
@@ -80,7 +81,7 @@ The three general-purpose Map implementations — **HashMap**, **TreeMap** and *
 
 LinkedHashMap provides two capabilities that are not available with LinkedHashSet. When you create a LinkedHashMap, you can order it based on key access rather than insertion. In other words, merely looking up the value associated with a key brings that key to the end of the map. Also, LinkedHashMap provides the removeEldestEntry method, which may be overridden to impose a policy for removing stale mappings automatically when new mappings are added to the map. This makes it very easy to implement a custom cache.
 
-### HashMap vs Hashtable
+### HashMap vs. Hashtable
 
 * Hashtable is synchronized, whereas HashMap is not. This makes **HashMap better for non-threaded applications**, as unsynchronized Objects typically perform better than synchronized ones. (Note: **synchronized methods can't be called in the same time from multiple threads**).
 * Hashtable does not allow null keys or values.  HashMap allows one null key and any number of null values.
@@ -136,3 +137,41 @@ for(Integer item : set) {
 ```
 Notice the code above, the `set` is sorted. HashSet uses a HashMap internally. HashMap stores its elements in a hash table using each Object's hashCode() method. For int and double, these are auto-boxed into the Integer and Double classes. When you make a HashSet of ints, it uses Integer's hashCode() method, which just returns the int. So if you add ints, they get stored sorted. But for double, Double's hashCode() method is much more complicated, because of the way doubles are represented in memory.
 
+## Static Keyword
+### Static vs. Non-static
+* Static methods are invoked using the class name.
+* Non-static methods are invoked using the instance name.
+* Static methods cannot access instance variables.
+
+### Why Static?
+```java
+int x = Math.round(5.6); // round is static
+```
+If `round` was non-static:
+```java
+Math m = new Math();
+int x = m.round(x);
+```
+
+Static varibles are used when they are common to all instances.
+
+## Thread
+### Thread vs. Process
+* A program in execution is often referred as process. A thread is a subset (part) of the process.
+* A process consists of multiple threads. A thread is a smallest part of the process that can execute concurrently with other parts (threads) of the process.
+* A process is sometime referred as task, A thread is often referred as lightweight process.
+* A process has its own address space. A thread uses the process's address space and share it with the other threads of that process.
+* 
+
+|Per process items             | Per thread items|
+|------------------------------|-----------------|
+|Address space                 | Program counter |
+|Global variables              | Registers  |
+|Open files                    | Stack  |
+|Child processes               | State  |
+|Pending alarms                |    |
+|Signals and signal handlers   |    |
+|Accounting information        |    |
+
+* New threads are easily created. However the creation of new processes require duplication of the parent process.
+* Threads have control over the other threads of the same process. A process does not have control over the sibling process, it has control over its child processes only.
