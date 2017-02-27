@@ -22,7 +22,7 @@ private static boolean isLetterOrDigit(char c) {
 ```
 
 ## Array, List, ArrayList, LinkedList
-An *Array* (System.Array) is fixed in size once it is allocated. You can't add items to it or remove items from it. Also, all the elements must be the same type. As a result, it is type safe, and is also the most efficient of the three, both in terms of memory and performance. Also, System.Array supports multiple dimensions (i.e. it has a Rank property) while List and ArrayList do not (although you can create a List of Lists or an ArrayList of ArrayLists, if you want to).
+An Array (System.Array) is fixed in size once it is allocated. You can't add items to it or remove items from it. Also, all the elements must be the same type. As a result, it is type safe, and is also the most efficient of the three, both in terms of memory and performance. Also, System.Array supports multiple dimensions (i.e. it has a Rank property) while List and ArrayList do not (although you can create a List of Lists or an ArrayList of ArrayLists, if you want to).
 ```java
 int[] arr1 = {1, 2, 7, 11, 15};
 int[] arr2 = new int[5];
@@ -76,3 +76,58 @@ Another benefit of using a LinkedList arise when you add or remove from the head
 Also, if you have large lists, keep in mind that memory usage is also different. Each element of a LinkedList has more overhead since pointers to the next and previous elements are also stored. ArrayLists don't have this overhead. However, ArrayLists take up as much memory as is allocated for the capacity, regardless of whether elements have actually been added.
 
 The default initial capacity of an ArrayList is pretty small (10 from Java 1.4 - 1.8). But since the underlying implementation is an array, the array must be resized if you add a lot of elements. To avoid the high cost of resizing when you know you're going to add a lot of elements, construct the ArrayList with a higher initial capacity.
+
+## Map
+You can read about Map implementations [here](http://docs.oracle.com/javase/tutorial/collections/implementations/map.html).
+
+The three general-purpose Map implementations are **HashMap**, **TreeMap** and **LinkedHashMap**. If you need SortedMap operations or key-ordered Collection-view iteration, use TreeMap; if you want maximum speed and don't care about iteration order, use HashMap; if you want near-HashMap performance and insertion-order iteration, use LinkedHashMap. LinkedHashMap provides two capabilities that are not available with LinkedHashSet. When you create a LinkedHashMap, you can order it based on key access rather than insertion. In other words, merely looking up the value associated with a key brings that key to the end of the map. Also, LinkedHashMap provides the removeEldestEntry method, which may be overridden to impose a policy for removing stale mappings automatically when new mappings are added to the map. This makes it very easy to implement a custom cache.
+
+### Iterate over each entry in a Map
+
+```java
+Map<Integer, Integer> tmap = new TreeMap<Integer, Integer>();
+tmap.put(5,5);
+tmap.put(2,2);
+tmap.put(6,6);
+tmap.put(1,1);
+tmap.put(9,9);
+System.out.println(tmap); // {1=1, 2=2, 5=5, 6=6, 9=9}
+// example 1
+Iterator entries = tmap.entrySet().iterator();
+while(entries.hasNext()) {
+    Map.Entry thisEntry = (Map.Entry) entries.next();
+    System.out.println(thisEntry.getKey());
+}
+// example 2
+for (Map.Entry<Integer, Integer> entry : tmap.entrySet()) {
+    System.out.println(entry.getKey());
+}
+```
+
+## Set
+You can read about Map implementations [here](http://docs.oracle.com/javase/tutorial/collections/implementations/set.html).
+
+There are three general-purpose Set implementations are **HashSet**, **TreeSet**, and **LinkedHashSet**. Which of these three to use is generally straightforward. HashSet is much faster than TreeSet (constant-time versus log-time for most operations) but offers no ordering guarantees. If you need to use the operations in the SortedSet interface, or if value-ordered iteration is required, use TreeSet; otherwise, use HashSet. It's a fair bet that you'll end up using HashSet most of the time. LinkedHashSet is in some sense intermediate between HashSet and TreeSet. Implemented as a hash table with a linked list running through it, it provides insertion-ordered iteration (least recently inserted to most recently) and runs nearly as fast as HashSet. The LinkedHashSet implementation spares its clients from the unspecified, generally chaotic ordering provided by HashSet without incurring the increased cost associated with TreeSet.
+
+### Iterate over each entry in a Set
+
+```java
+Set<Integer> set = new HashSet<Integer>();
+set.add(1);
+set.add(9);
+set.add(4);
+set.add(5);
+set.add(2);
+System.out.println(set); //[1, 2, 4, 5, 9]
+// example 1
+Iterator it = set.iterator();
+while (it.hasNext()) {
+    System.out.println(it.next());
+}
+// example 2
+for(Integer item : set) {
+    System.out.println(item);
+}
+```
+Notice the code above, the `set` is sorted. HashSet uses a HashMap internally. HashMap stores its elements in a hash table using each Object's hashCode() method. For int and double, these are auto-boxed into the Integer and Double classes. When you make a HashSet of ints, it uses Integer's hashCode() method, which just returns the int. So if you add ints, they get stored sorted. But for double, Double's hashCode() method is much more complicated, because of the way doubles are represented in memory.
+
