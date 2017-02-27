@@ -20,6 +20,12 @@ private static boolean isLetterOrDigit(char c) {
            (c >= '0' && c <= '9');
 }
 ```
+### Convert char to int
+```java
+int i = Character.getNumericValue('9');
+int i = Integer.parseInt(String.valueOf('9');
+int i = '9' - '0';
+```
 
 ## List
 ### Array
