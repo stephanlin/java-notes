@@ -21,7 +21,8 @@ private static boolean isLetterOrDigit(char c) {
 }
 ```
 
-## Array, List, ArrayList, LinkedList
+## List
+### Array
 An Array (System.Array) is fixed in size once it is allocated. You can't add items to it or remove items from it. Also, all the elements must be the same type. As a result, it is type safe, and is also the most efficient of the three, both in terms of memory and performance. Also, System.Array supports multiple dimensions (i.e. it has a Rank property) while List and ArrayList do not (although you can create a List of Lists or an ArrayList of ArrayLists, if you want to).
 ```java
 int[] arr1 = {1, 2, 7, 11, 15};
@@ -30,18 +31,7 @@ for (int i=0; i<arr2.length; i++) {
   arr2[i] = i;
 }
 ```
-There are two general-purpose List implementations — ArrayList and LinkedList.
-
-An ArrayList is a flexible array which contains a list of objects, it is said to be non-generic class. You can add and remove items from it and it automatically deals with allocating space. If you store value types in it, they are boxed and unboxed, which can be a bit inefficient. Also, it is not type-safe.
-```java
-ArrayList al = new ArrayList();
-al.add(50);
-al.add(50.0);
-al.add("50.0");
-System.out.println(al); //[50, 50.0, 50.0]
-```
-
-A List<> leverages generics; it is essentially a type-safe version of ArrayList. This means there is no boxing or unboxing (which improves performance) and if you attempt to add an item of the wrong type it'll generate a compile-time error.
+### ArrayList, LinkedList
 
 ```java
 List<?> myList = new ArrayList<?>();
@@ -49,7 +39,7 @@ ArrayList<?> myList = new ArrayList<?>();
 ```
 For the example above, almost always the first one is preferred over the second one. The first has the advantage that the implementation of the List can change (to a LinkedList for example), without affecting the rest of the code. This will be a difficult task to do with an ArrayList, not only because you will need to change ArrayList to LinkedList everywhere, but also because you may have used ArrayList specific methods. Since you are referring mylist as List<Integer> while it is still ArrayList<Integer>, hence you can use the methods available in the List interface ONLY. This is better statement, if you are using cross class.method functionality.
 
-### ArrayList vs LinkedList
+There are two general-purpose List implementations — ArrayList and LinkedList.
 You can read about List implementations [here](http://docs.oracle.com/javase/tutorial/collections/implementations/list.html).
 
 | LinkedList                                 | ArrayList                                   |
@@ -80,7 +70,7 @@ The default initial capacity of an ArrayList is pretty small (10 from Java 1.4 -
 ## Map
 You can read about Map implementations [here](http://docs.oracle.com/javase/tutorial/collections/implementations/map.html).
 
-The three general-purpose Map implementations are **HashMap**, **TreeMap** and **LinkedHashMap**. If you need SortedMap operations or key-ordered Collection-view iteration, use TreeMap; if you want maximum speed and don't care about iteration order, use HashMap; if you want near-HashMap performance and insertion-order iteration, use LinkedHashMap. LinkedHashMap provides two capabilities that are not available with LinkedHashSet. When you create a LinkedHashMap, you can order it based on key access rather than insertion. In other words, merely looking up the value associated with a key brings that key to the end of the map. Also, LinkedHashMap provides the removeEldestEntry method, which may be overridden to impose a policy for removing stale mappings automatically when new mappings are added to the map. This makes it very easy to implement a custom cache.
+The three general-purpose Map implementations — **HashMap**, **TreeMap** and **LinkedHashMap**. If you need SortedMap operations or key-ordered Collection-view iteration, use TreeMap; if you want maximum speed and don't care about iteration order, use HashMap; if you want near-HashMap performance and insertion-order iteration, use LinkedHashMap. LinkedHashMap provides two capabilities that are not available with LinkedHashSet. When you create a LinkedHashMap, you can order it based on key access rather than insertion. In other words, merely looking up the value associated with a key brings that key to the end of the map. Also, LinkedHashMap provides the removeEldestEntry method, which may be overridden to impose a policy for removing stale mappings automatically when new mappings are added to the map. This makes it very easy to implement a custom cache.
 
 ### Iterate over each entry in a Map
 
@@ -107,7 +97,7 @@ for (Map.Entry<Integer, Integer> entry : tmap.entrySet()) {
 ## Set
 You can read about Map implementations [here](http://docs.oracle.com/javase/tutorial/collections/implementations/set.html).
 
-There are three general-purpose Set implementations are **HashSet**, **TreeSet**, and **LinkedHashSet**. Which of these three to use is generally straightforward. HashSet is much faster than TreeSet (constant-time versus log-time for most operations) but offers no ordering guarantees. If you need to use the operations in the SortedSet interface, or if value-ordered iteration is required, use TreeSet; otherwise, use HashSet. It's a fair bet that you'll end up using HashSet most of the time. LinkedHashSet is in some sense intermediate between HashSet and TreeSet. Implemented as a hash table with a linked list running through it, it provides insertion-ordered iteration (least recently inserted to most recently) and runs nearly as fast as HashSet. The LinkedHashSet implementation spares its clients from the unspecified, generally chaotic ordering provided by HashSet without incurring the increased cost associated with TreeSet.
+There are three general-purpose Set implementations — **HashSet**, **TreeSet**, and **LinkedHashSet**. Which of these three to use is generally straightforward. HashSet is much faster than TreeSet (constant-time versus log-time for most operations) but offers no ordering guarantees. If you need to use the operations in the SortedSet interface, or if value-ordered iteration is required, use TreeSet; otherwise, use HashSet. It's a fair bet that you'll end up using HashSet most of the time. LinkedHashSet is in some sense intermediate between HashSet and TreeSet. Implemented as a hash table with a linked list running through it, it provides insertion-ordered iteration (least recently inserted to most recently) and runs nearly as fast as HashSet. The LinkedHashSet implementation spares its clients from the unspecified, generally chaotic ordering provided by HashSet without incurring the increased cost associated with TreeSet.
 
 ### Iterate over each entry in a Set
 
