@@ -248,5 +248,45 @@ public class Runner {
 You can force a function to NOT be virtual in a generic class by making it final.
 
 
+## Overriding vs. Hiding
+Overriding basically supports late binding. Therefore, which method will be called is decided at run time.It is for non-static methods. Hiding is for all other members (static methods , instance members, static members). It is based on the early binding. More clearly, the method or member to be called or used is decided during compile time. Consider the following example:
+```java
+class Foo {
+    public static void classMethod() {
+        System.out.println("classMethod() in Foo");
+    }
+ 
+    public void instanceMethod() {
+        System.out.println("instanceMethod() in Foo");
+    }
+}
+ 
+class Bar extends Foo {
+    public static void classMethod() {
+        System.out.println("classMethod() in Bar");
+    }
+ 
+    public void instanceMethod() {
+        System.out.println("instanceMethod() in Bar");
+    }
+}
+  
+class Test {
+    public static void main(String[] args) {
+        Foo f = new Bar();
+        f.instanceMethod();
+        f.classMethod();
+    }
+}
+```
+Output:
+```
+instanceMethod() in Bar
+classMethod() in Foo
+```
+
+Since instanceMethod() is an instance method, in which Bar overrides the method from Foo, at run time the JVM uses the actual class of the instance f to determine which method to run. Although f was declared as a Foo, the actual instance we created was a new Bar(). So at runtime, the JVM finds that f is a Bar instance, and so it calls instanceMethod() in Bar rather than the one in Foo. That's how Java normally works for instance methods. 
+
+With classMethod() though. since it's a class method, the compiler and JVM don't expect to need an actual instance to invoke the method. And even if you provide one (which we did: the instance referred to by f) the JVM will never look at it. The compiler will only look at the declared type of the reference, and use that declared type to determine, at compile time, which method to call. Since f is declared as type Foo, the compiler looks at f.classMethod() and decides it means Foo.classMethod. It doesn't matter that the instance reffered to by f is actually a Bar - for static methods, the compiler only uses the declared type of the reference. That's what we mean when we say a static method does not have run-time polymorphism. 
 
 
