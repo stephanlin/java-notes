@@ -39,11 +39,7 @@ for (int i=0; i<arr2.length; i++) {
 
 ## List
 
-```java
-List<?> myList = new ArrayList<?>();
-ArrayList<?> myList = new ArrayList<?>();
-```
-For the example above, almost always the first one is preferred over the second one. The first has the advantage that the implementation of the List can change (to a LinkedList for example), without affecting the rest of the code. This will be a difficult task to do with an ArrayList, not only because you will need to change ArrayList to LinkedList everywhere, but also because you may have used ArrayList specific methods. Since you are referring mylist as List<Integer> while it is still ArrayList<Integer>, hence you can use the methods available in the List interface ONLY. This is better statement, if you are using cross class.method functionality.
+List is an interface.
 
 ### ArrayList vs. LinkedList
 There are two general-purpose List implementations — ArrayList and LinkedList.
@@ -73,6 +69,13 @@ Another benefit of using a LinkedList arise when you add or remove from the head
 Also, if you have large lists, keep in mind that memory usage is also different. Each element of a LinkedList has more overhead since pointers to the next and previous elements are also stored. ArrayLists don't have this overhead. However, ArrayLists take up as much memory as is allocated for the capacity, regardless of whether elements have actually been added.
 
 The default initial capacity of an ArrayList is pretty small (10 from Java 1.4 - 1.8). But since the underlying implementation is an array, the array must be resized if you add a lot of elements. To avoid the high cost of resizing when you know you're going to add a lot of elements, construct the ArrayList with a higher initial capacity.
+
+```java
+List<?> myList = new ArrayList<?>();
+ArrayList<?> myList = new ArrayList<?>();
+```
+For the example above, almost always the first one is preferred over the second one. The first has the advantage that the implementation of the List can change (to a LinkedList for example), without affecting the rest of the code. This will be a difficult task to do with an ArrayList, not only because you will need to change ArrayList to LinkedList everywhere, but also because you may have used ArrayList specific methods. Since you are referring mylist as List<Integer> while it is still ArrayList<Integer>, hence you can use the methods available in the List interface ONLY. This is better statement, if you are using cross class.method functionality.
+
 
 ## Map
 You can read about Map implementations [here](http://docs.oracle.com/javase/tutorial/collections/implementations/map.html).
@@ -139,6 +142,7 @@ Notice the code above, the `set` is sorted. HashSet uses a HashMap internally. H
 
 ## Static Keyword
 ### Static vs. Non-static
+* Static methods belong to the class not to the object(instance).
 * Static methods are invoked using the class name.
 * Non-static methods are invoked using the instance name.
 * Static methods cannot access instance variables.
@@ -152,8 +156,15 @@ If `round` was non-static:
 Math m = new Math();
 int x = m.round(x);
 ```
+### When to use Static methods?
+* If you are writing utility classes and they are not supposed to be changed.
+* If the method is not using any instance variable.
+* If any operation is not dependent on instance creation.
+* If there is some code that can easily be shared by all the instance methods, extract that code into a static method.
+* If you are sure that the definition of the method will never be changed or overridden. As static methods can not be overridden.
 
-Static varibles are used when they are common to all instances.
+Static varibles are used when they are common to all instances, a single copy to be shared by all instances of the class. Static variables are initialized only once , at the start of the execution . These variables will be initialized first, before the initialization of any instance variables
+
 
 ## Thread
 ### Thread vs. Process
@@ -175,3 +186,67 @@ Static varibles are used when they are common to all instances.
 
 * New threads are easily created. However the creation of new processes require duplication of the parent process.
 * Threads have control over the other threads of the same process. A process does not have control over the sibling process, it has control over its child processes only.
+
+## Static Binding vs. Dynamic Binding
+* Static binding in Java occurs during Compile time while Dynamic binding occurs during Runtime.
+* private, final and static methods and variables uses static binding and bonded by compiler while virtual methods are bonded during runtime based upon runtime object. 
+* Static binding uses class information for binding while Dynamic binding uses Object to resolve binding.
+* Overloaded methods are bonded using static binding while overridden methods are bonded using dynamic binding at runtime. 
+
+Note: Dynamic method binding does not happend for overloaded methods.
+
+### Dynamic Binding Example
+```java
+public static void main(String args[]) {
+    Vehicle vehicle = new Car(); //here Type is vehicle but object will be Car
+    vehicle.start();       //Car's start called because start() is overridden method
+}
+```
+
+### Method Overloading
+A feature that allows a class to have two or more methods having same name, if their argument lists are different.
+
+### Virtual Methods
+A virtual function or virtual method is a function or method whose behaviour can be overridden within an inheriting class by a function with the same signature. 
+
+Java interface methods are all "pure virtual" because they are designed to be overridden. For example:
+```java
+interface Bicycle {         //the function applyBrakes() is virtual because
+    void applyBrakes();     //functions in interfaces are designed to be 
+}                           //overridden.
+
+class ACMEBicycle implements Bicycle {
+    public void applyBrakes(){               //Here we implementing applyBrakes()
+       System.out.println("Brakes applied"); //function, proving it is virtual.
+    }
+}
+```
+
+Java Abstract classes contain implicitly "virtual" methods, implemented by classes extending it. For example:
+```java
+abstract class Dog {                   
+    final void bark() {               //bark() is not virtual because it is 
+        System.out.println("woof");   //final and if you tried to override it
+    }                                 //you would get a compile time error.
+
+    abstract void jump();             //jump() is a virtual function because it
+}                                     //is part of an abstract class and isn't
+                                      //final.  
+class MyDog extends Dog{
+    void jump(){
+        System.out.println("boing");    //here jump() is being overridden, a 
+    }                                   //demonstration that it is virtual.
+}
+public class Runner {
+    public static void main(String[] args) {
+        MyDog myDog = new MyDog();       //instantiating myDog
+        myDog.jump();                    //calling the overridden function jump()
+    }
+}
+```
+
+You can force a function to NOT be virtual in a generic class by making it final.
+
+
+
+
