@@ -289,6 +289,19 @@ Since instanceMethod() is an instance method, in which Bar overrides the method 
 
 With classMethod() though. since it's a class method, the compiler and JVM don't expect to need an actual instance to invoke the method. And even if you provide one (which we did: the instance referred to by f) the JVM will never look at it. The compiler will only look at the declared type of the reference, and use that declared type to determine, at compile time, which method to call. Since f is declared as type Foo, the compiler looks at f.classMethod() and decides it means Foo.classMethod. It doesn't matter that the instance reffered to by f is actually a Bar - for static methods, the compiler only uses the declared type of the reference. That's what we mean when we say a static method does not have run-time polymorphism. 
 
+**Overridden non-static methods are selected at run time based on dynamic type**. Consider the following example:
+
+Suppose we have two classes:
+Dog: Implements bark() method.
+ShowDog: Extends Dog, overrides bark method.
+```java
+Object obj = new ShowDog("Mortimer");
+Dog d = ((Dog) obj);
+d.bark(); // ShowDog.bark() is called
+          // because runtime type is ShowDog
+```
+
+
 ## Casting
 ### Compile-Time Types and Expressions
 Expressions have compile-time types. Consider the following example:
@@ -313,6 +326,7 @@ Casting is powerful but dangerous, because you might get a ClassCastException at
 ## Extends
 **Important Note:** extends should only be used for **is-a**(hypernymic) relationships.
 
+Extends can be used to enable **interface inheritance**(what) and **implementation inheritance**(How).
 When classA extends classB, it inherits all members of classB including all instance and static variables, methods, and nestd classes. Members maybe private and thus inaccessible. Constructors are not inherited. However, any subclass constructors must start with a call to a constructor for the super class. Consider the following constructors, they are exactly equivalent. The first one will automatically call `super();`.
 
 ```java
@@ -342,6 +356,30 @@ public ClassA(Item x) {
     // initialization 
 }
 ```
+
+## Interface and Abstract Class
+Read more [here](https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html).
+
+### Interface
+* Cannot be instantiated.
+* Can provide either abstract or concrete methods.
+    * Use no keyword for abstract methods.
+    * Use `default` keyword for concrete methods.
+* Can provide only public static final variables.
+* Can provide only public methods.
+* Primarily for interface inheritance.
+* Classes can implement multiple interfaces.
+
+### Abstract Classes
+Abstract classes are an intermediate level between interfaces and classes.
+* Cannot be instantiated.
+* Can provide either abstract or concrete methods.
+    * Use `abstract` keyword for abstract methods.
+    * Use no keyword for concrete methods.
+* Can provide variables (any kind).
+* Can provide methods (any kind).
+* Can do anything an interface can do, and more.
+* Subclasses only extend one abstract class.
 
 ## Encapsulation
 ### Module
