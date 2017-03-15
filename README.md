@@ -45,6 +45,44 @@ Arrays.sort(intervals, new Comparator<Interval>() {
 });
 ```
 
+## Autoboxing and Unboxing
+If Java code expects a wrapper type and gets a primitive, it is autoboxed.
+```java
+public static blah(Integer i) {
+    System.out.printlin(i);
+}
+int x = 1;
+blah(x);
+```
+If Java code expects a primitive and gets a wrapper, it is unboxed;
+```java
+public static blah(int i) {
+    System.out.printlin(i);
+}
+Integer x = new Integer(1);
+blah(x);
+```
+
+NOTE: Arrays are never autoboxed/unboxed, for example, Integer[] cannot be used in place of int[]. Autoboxing/unboxing incurs measurable performance impact. Wrapper types use much more memory than primitive types.
+
+### Promotion
+Moving from a primitive type with a narrower range to wider range. In this case we say that the value is promoted.
+```java
+public static void printDouble(double x) {
+    System.out.println(x);
+}
+int x = 1;
+printDouble(x);
+```
+However, to move from wider format to a narrower format, must use casting.
+```java
+public static void printInt(int x) {
+    System.out.println(x);
+}
+double x = 1d;
+printInt((int) x);
+```
+
 ## Array
 An Array (System.Array) is fixed in size once it is allocated. You can't add items to it or remove items from it. Also, all the elements must be the same type. As a result, it is type safe, and is also the most efficient of the three, both in terms of memory and performance. Also, System.Array supports multiple dimensions (i.e. it has a Rank property) while List and ArrayList do not (although you can create a List of Lists or an ArrayList of ArrayLists, if you want to).
 ```java
