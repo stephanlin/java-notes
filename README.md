@@ -27,6 +27,24 @@ int i = Integer.parseInt(String.valueOf('9');
 int i = '9' - '0';
 ```
 
+## compare
+```java
+public class Interval {
+    int start;
+    int end;
+    Interval() { start = 0; end = 0; }
+    Interval(int s, int e) { start = s; end = e; }
+}
+List<Interval> intervals = new List<Interval>();
+intervals.sort((a, b) -> Integer.compare(a.start, b.start));
+```
+```
+Interval[] intervals = new Interval[100];
+Arrays.sort(intervals, new Comparator<Interval>() {
+    public int compare(Interval a, Interval b) { return a.start - b.start; } 
+});
+```
+
 ## Array
 An Array (System.Array) is fixed in size once it is allocated. You can't add items to it or remove items from it. Also, all the elements must be the same type. As a result, it is type safe, and is also the most efficient of the three, both in terms of memory and performance. Also, System.Array supports multiple dimensions (i.e. it has a Rank property) while List and ArrayList do not (although you can create a List of Lists or an ArrayList of ArrayLists, if you want to).
 ```java
