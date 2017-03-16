@@ -45,6 +45,8 @@ Arrays.sort(intervals, new Comparator<Interval>() {
 });
 ```
 
+NOTE: In Java, Array.sort(someArray) uses Mergesort if someArray consists of Objects, Quicksort if someArray consists of primitives. Because Quicksort is faster but not stable, Mergesort is stable (won't reorder elements that are equal).
+
 ## Autoboxing and Unboxing
 If Java code expects a wrapper type and gets a primitive, it is autoboxed.
 ```java
