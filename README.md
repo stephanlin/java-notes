@@ -437,6 +437,15 @@ Abstract classes are an intermediate level between interfaces and classes.
 * Can do anything an interface can do, and more.
 * Subclasses only extend one abstract class.
 
+## Inheritance
+Interface inheritance allows subtype polymorphism. Implementation inheritance allows code reuse.
+
+### Polymorphism
+Subclasses of a class can define their own unique behaviors and yet share some of the same functionality of the parent class.
+
 ## Encapsulation
 ### Module
-A set of methods that work together as a whole to perform some task or set of related tasks. A module is said to be encapsulated if its implementation is completed hidden and it can be accessed only through a documented interface.
+A set of methods that work together as a whole to perform some task or set of related tasks. A module is said to be encapsulated if its implementation is completely hidden and it can be accessed only through a documented interface. For example, an abstract data type, such as map, stack, is an encapsulated data structure.
+
+### ADTs and APIs
+The API of an ADT is the list of constructors and methods, including an informal description of the effect of each.
