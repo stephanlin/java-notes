@@ -381,6 +381,14 @@ Poodle largerPoodle = (Poodle) maxDog(frank, frankJr);
 
 Casting is powerful but dangerous, because you might get a ClassCastException at runtime.
 
+## Generalization and Specialization
+The process of extracting common characteristics from two or more classes and combining them into a generalized superclass, is called Generalization. The common characteristics can be attributes or methods. Generalization is the bottom-up process of abstraction, where we club the differences among entities according to the common feature and generalize them into a single superclass. The original entities are thus subclasses of it.
+
+Specialization is the reverse process of Generalization means creating new sub classes from an existing class.
+
+### Extension of Functionality
+A situation in which a subclass does not add new attributes but instead only add new methods.
+
 ## Extends
 **Important Note:** extends should only be used for **is-a**(hypernymic) relationships.
 
