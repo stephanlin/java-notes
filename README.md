@@ -134,6 +134,13 @@ ArrayList<?> myList = new ArrayList<?>();
 ```
 For the example above, almost always the first one is preferred over the second one. The first has the advantage that the implementation of the List can change (to a LinkedList for example), without affecting the rest of the code. This will be a difficult task to do with an ArrayList, not only because you will need to change ArrayList to LinkedList everywhere, but also because you may have used ArrayList specific methods. Since you are referring mylist as List<Integer> while it is still ArrayList<Integer>, hence you can use the methods available in the List interface ONLY. This is better statement, if you are using cross class.method functionality.
 
+## Hash Table
+A hash table (hash map) is a data structure used to implement an associative array, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
+
+Ideally, the hash function will assign each key to a unique bucket, but most hash table designs employ an imperfect hash function, which might cause hash collisions where the hash function generates the same index for more than one key. Such collisions must be accommodated in some way.
+
+If the array becomes full, we make a new array with doubled length, rehash all the elements and add them into the new array, then we dispose the old one. This is most likely the most expensive operation on HashMap, so you want to tell your Maps how many buckets you'll use if you know it in before.
+
 
 ## Map
 You can read about Map implementations [here](http://docs.oracle.com/javase/tutorial/collections/implementations/map.html).
