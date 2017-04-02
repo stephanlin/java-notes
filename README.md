@@ -159,7 +159,9 @@ Multiple objects might end up with same numberical representation. It's impossib
 Storing all items that map to h in a linked list.
 
 ### Open Addressing
-Open addressing, or closed hashing, is an other method of collision resolution. With this method a hash collision is resolved by probing, or searching through alternate locations in the array (the probe sequence) until either the target record is found, or an unused array slot is found, which indicates that there is no such key in the table
+Open addressing, or closed hashing, is an other method of collision resolution. With this method a hash collision is resolved by probing, or searching through alternate locations in the array (the probe sequence) until either the target record is found, or an unused array slot is found, which indicates that there is no such key in the table. Basically, if target bucket is already occupied use a different bucket. eg.
+* Linear probing: use next address, and if already occupied just keep scanning one by one.
+* Quadratic probing: use next address, and if already occupied, trying looking 4 ahead, then 9 ahead, then 16 ahead, ...
 
 ### Hash Table
 A hash table (hash map) is a data structure used to implement an associative array, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
@@ -231,6 +233,20 @@ for(Integer item : set) {
 }
 ```
 Notice the code above, the `set` is sorted. HashSet uses a HashMap internally. HashMap stores its elements in a hash table using each Object's hashCode() method. For int and double, these are auto-boxed into the Integer and Double classes. When you make a HashSet of ints, it uses Integer's hashCode() method, which just returns the int. So if you add ints, they get stored sorted. But for double, Double's hashCode() method is much more complicated, because of the way doubles are represented in memory.
+
+
+## Heap
+You can read more [here](http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html).
+
+Binary min-heap: tree that is complete and obeys min-heap properity:
+* min-heap: every node is less than or equal to both of its chidren.
+* Complete: missing items only at the bottom level (if any), all nodes are far left as possible.
+
+Time complexities:
+* Find Min/Find Max: O(1)
+* Insert: O(log n)
+* Delete Min/Delete Max: O(log n)
+
 
 ## Static Keyword
 ### Static vs. Non-static
