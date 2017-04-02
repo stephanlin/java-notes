@@ -142,7 +142,26 @@ ArrayList<?> myList = new ArrayList<?>();
 ```
 For the example above, almost always the first one is preferred over the second one. The first has the advantage that the implementation of the List can change (to a LinkedList for example), without affecting the rest of the code. This will be a difficult task to do with an ArrayList, not only because you will need to change ArrayList to LinkedList everywhere, but also because you may have used ArrayList specific methods. Since you are referring mylist as List<Integer> while it is still ArrayList<Integer>, hence you can use the methods available in the List interface ONLY. This is better statement, if you are using cross class.method functionality.
 
-## Hash Table
+## Hashing
+### hashCode
+Computing a hashCode is to convert data to an index. Java requires that every object provides a method that converts itself intor an integer: hashCode().
+
+Typically, computing hash function consists of two steps:
+* Computing a hashCode (integer between -2^31 and 2^31-1).
+* Computing index = hashCode % M(size of array).
+
+If load factor L=N/M gets too large, increase M.
+
+### Handling Collisions
+Multiple objects might end up with same numberical representation. It's impossible to make a perfect hashing function to covert every different object to an unique numberical representation. Therefore, we can't avoid collision. To resolve ambiguilty, suppose N items have the same hashcode h, instead of storing a value in position h, store a list of these N items at position h.
+
+### External Chaining
+Storing all items that map to h in a linked list.
+
+### Open Addressing
+Open addressing, or closed hashing, is an other method of collision resolution. With this method a hash collision is resolved by probing, or searching through alternate locations in the array (the probe sequence) until either the target record is found, or an unused array slot is found, which indicates that there is no such key in the table
+
+### Hash Table
 A hash table (hash map) is a data structure used to implement an associative array, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
 
 Ideally, the hash function will assign each key to a unique bucket, but most hash table designs employ an imperfect hash function, which might cause hash collisions where the hash function generates the same index for more than one key. Such collisions must be accommodated in some way.
