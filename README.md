@@ -163,6 +163,15 @@ Open addressing, or closed hashing, is an other method of collision resolution. 
 * Linear probing: use next address, and if already occupied just keep scanning one by one.
 * Quadratic probing: use next address, and if already occupied, trying looking 4 ahead, then 9 ahead, then 16 ahead, ...
 
+### equals() and hashCode()
+**What can go wrong if we override hashCode() but not equals()?**
+
+Consider an array of size 4 to store Map of Animal Objects, eg. Dog(16) Dog which its hashCode is 16. And we have arr[0] -> Dog(16) -> Cat(20). Now we want to insert Dog(16). Supposedly nothing will happen, however, we would have arr[0] -> Dog(16) -> Cat(20) -> Dog(16), because we did not override equals().
+
+**What can go wrong if we override equals() but not hashCode()?**
+
+If we have arr[0] -> Dog(16) -> Cat(20), but now we want to insert Dog(17), then we would have arr[1] -> Dog(17) and we would have duplicate objects.
+
 ### Hash Table
 A hash table (hash map) is a data structure used to implement an associative array, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
 
