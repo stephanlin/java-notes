@@ -285,6 +285,9 @@ Static varibles are used when they are common to all instances, a single copy to
 
 ## Thread
 ### Thread vs. Process
+
+Both processes and threads are independent sequences of execution. The typical difference is that threads (of the same process) run in a shared memory space, while processes run in separate memory spaces.
+
 * A program in execution is often referred as process. A thread is a subset (part) of the process.
 * A process consists of multiple threads. A thread is a smallest part of the process that can execute concurrently with other parts (threads) of the process.
 * A process is sometime referred as task, A thread is often referred as lightweight process.
