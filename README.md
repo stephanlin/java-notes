@@ -1,5 +1,20 @@
 # My Java Notes
 
+## Current Timestamp
+
+```java
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+public static void main(String[] args) {
+
+	Date date = new Date();
+	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy h:mm:ss a");
+	String formattedDate = sdf.format(date);
+	System.out.println(formattedDate); // 09/05/2017 1:28:48 PM
+}
+```
+
 ## char
 
 ### Unicode Encoding
