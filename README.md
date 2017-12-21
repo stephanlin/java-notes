@@ -5,6 +5,7 @@
 ```java
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
 
 public static void main(String[] args) {
 
@@ -12,6 +13,13 @@ public static void main(String[] args) {
 	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy h:mm:ss a");
 	String formattedDate = sdf.format(date);
 	System.out.println(formattedDate); // 09/05/2017 1:28:48 PM
+	
+	long currTime = System.currentTimeMillis();
+	Timestamp ts = new Timestamp(currTime);
+	System.out.println(ts); // 2017-12-21 17:43:07.504
+	
+	// create your own timestamp
+	Timestamp ts1 = Timestamp.valueOf("2018-01-03 10:10:10.123");
 }
 ```
 
